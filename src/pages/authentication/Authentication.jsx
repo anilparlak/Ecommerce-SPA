@@ -1,13 +1,16 @@
-import React from 'react'
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SignInForm from '../../components/sign-in-form/SignInForm';
 import SignUpForm from '../../components/sign-up-form/SignUpForm ';
-import {signInWithGooglePopup , createUserDocumentFromAuth,} from "../../utils/firebase/Firebase";
+import { UserContext } from '../../contexts/user';
+
 import "./authentication.scss"
 const Authentication = () => {
-    // const loginGoogleUser = async () => {
-    //     const {user} = await signInWithGooglePopup();
-    //     const userDocRef = await createUserDocumentFromAuth(user);
-    // }
+  const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(()=>{
+    currentUser && navigate("/")
+  },[currentUser])
   return (
     <div className='authentication-container'>
       <SignInForm />
